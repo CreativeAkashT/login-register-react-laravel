@@ -16,6 +16,8 @@ class UsersController extends Controller
     public function register(UserRegisterationRequest $request) {
         try{
             $user = User::create($request->validated());
+            //we can also create a custom class then we have to just pass data or message like
+            //CustomResponse::success or CustomResponse::error
             return Response::json(["success" => true, "data" => [ "token" => $user->getLoginToken() ]]);
         }catch(Exception $e) {
             return Response::json(["success" => false, "message" => $e->getMessage()]);
